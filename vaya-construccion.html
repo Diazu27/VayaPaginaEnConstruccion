@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vaya! — En construcción</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap"
+    rel="stylesheet">
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f5f0;
+      --yellow: #FAD601;
+      --blue: #22AFE5;
+      --orange: #F08C12;
+      --green: #30A037;
+      --red: #CD141B;
+    }
+
+    html,
+    body {
+      height: 100%;
+      background: var(--white);
+      font-family: "Montserrat", sans-serif;
+      overflow: hidden;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 60px;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 40px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── SHAPES ── */
+    .shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* Each shape anchored to a corner, sized with clamp so they shrink on mobile */
+    .shape-1 {
+      top: 4%;
+      left: -20px;
+      width: clamp(100px, 25vw, 240px);
+      animation-delay: 0s;
+    }
+
+    .shape-2 {
+      bottom: 8%;
+      right: -20px;
+      width: clamp(90px, 20vw, 200px);
+      animation-delay: 1.5s;
+    }
+
+    .shape-3 {
+      bottom: 6%;
+      left: -10px;
+      width: clamp(80px, 18vw, 180px);
+      animation-delay: 3s;
+    }
+
+    .shape-4 {
+      top: 4%;
+      right: -10px;
+      width: clamp(70px, 15vw, 160px);
+      animation-delay: 2s;
+    }
+
+    .shape svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-14px) rotate(5deg);
+      }
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 700px;
+      /* horizontal padding keeps text away from corner shapes */
+      padding-left: clamp(20px, 5vw, 120px);
+      padding-right: clamp(20px, 5vw, 120px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--black);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 36px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--yellow);
+      border-radius: 50%;
+      animation: blink 1.2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .headline {
+      font-size: clamp(1.8rem, 5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--black);
+      animation: fadeUp 0.6s 0.1s ease both;
+      margin-bottom: 12px;
+    }
+
+    .headline .cursive {
+      font-family: 'Pacifico', cursive;
+      font-weight: 300;
+      color: black;
+      font-size: 1.15em;
+      display: inline-block;
+      transform: rotate(-2deg);
+      position: relative;
+      z-index: 2;
+    }
+
+    .underline-doodle {
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+
+      position: absolute;
+      z-index: -1;
+      height: auto;
+      display: block;
+    }
+
+    .subline {
+      font-size: clamp(0.8rem, 1.8vw, 1.1rem);
+      font-weight: 400;
+      color: var(--black);
+      opacity: 0.55;
+      margin-top: 20px;
+      line-height: 1.6;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-top: 40px;
+      animation: fadeUp 0.6s 0.35s ease both;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      padding: 14px 24px;
+      border-left: 1px solid rgba(0, 0, 0, 0.12);
+      text-align: center;
+    }
+
+    .stat:first-child {
+      border-left: none;
+    }
+
+    .stat-num {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--black);
+      display: block;
+    }
+
+    .stat-num.highlight {
+      color: var(--blue);
+    }
+
+    .stat-label {
+      font-size: 0.62rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--black);
+      opacity: 0.45;
+      display: block;
+      margin-top: 2px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--orange), var(--red), var(--yellow));
+      background-size: 300% 100%;
+      animation: slide-gradient 4s linear infinite;
+    }
+
+    @keyframes slide-gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 300% 50%;
+      }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .hero {
+        padding: 60px 16px 50px;
+      }
+
+      .logo {
+        margin-bottom: 32px;
+      }
+
+      .badge {
+        margin-bottom: 20px;
+        font-size: 0.6rem;
+        padding: 5px 12px;
+      }
+
+      .stat {
+        padding: 10px 14px;
+      }
+
+      .stat-num {
+        font-size: 1.1rem;
+      }
+
+      /* Push shapes further off-screen on very small screens */
+      .shape-1 {
+        left: -40px;
+      }
+
+      .shape-2 {
+        right: -40px;
+      }
+
+      .shape-3 {
+        left: -40px;
+      }
+
+      .shape-4 {
+        right: -40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero">
+
+    <div class="shapes">
+
+      <div class="shape shape-1">
+        <svg viewBox="0 0 359 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M6.00195 34.927C6.80923 34.57 7.29013 31.0355 7.71969 29.8633C9.24087 25.7122 10.9367 21.2868 13.1274 18.1606C15.348 14.9917 21.6852 7.26933 24.7699 11.6341C26.108 13.5274 25.7893 20.1138 26.0423 22.7741C26.7132 29.828 27.676 37.0347 30.7502 42.1286C36.6757 51.9473 40.0366 45.3033 43.665 35.9397C46.9288 27.5173 48.6894 16.33 53.9715 10.8464C57.6237 7.05483 58.9218 9.5192 59.3792 15.9101C60.0465 25.234 61.01 36.3342 65.4231 42.5787C69.2162 47.9458 73.722 34.1073 75.157 29.6382C77.7712 21.4964 80.3611 13.4013 85.5907 9.83365C89.5767 7.11427 90.4616 8.52671 90.8711 15.5725C91.4705 25.8844 93.7996 52.7984 102.514 50.9057C104.994 50.3669 107.21 45.2536 108.748 42.3537C112.48 35.3216 116.33 28.3911 119.818 20.9737C121.538 17.3172 125.106 5.67092 128.534 6.00777C130.968 6.24695 132.326 18.9713 133.115 21.7614C134.525 26.7512 135.944 33.1209 139.54 32.9015C142.624 32.7134 145.878 28.5559 148.002 24.7996"
+            stroke="#FAD601" stroke-width="12" stroke-linecap="round" />
+          <path
+            d="M144.002 34.927C144.809 34.57 145.29 31.0355 145.72 29.8633C147.241 25.7122 148.937 21.2868 151.127 18.1606C153.348 14.9917 159.685 7.26933 162.77 11.6341C164.108 13.5274 163.789 20.1138 164.042 22.7741C164.713 29.828 165.676 37.0347 168.75 42.1286C174.676 51.9473 178.037 45.3033 181.665 35.9397C184.929 27.5173 186.689 16.33 191.971 10.8464C195.624 7.05483 196.922 9.5192 197.379 15.9101C198.046 25.234 199.01 36.3342 203.423 42.5787C207.216 47.9458 211.722 34.1073 213.157 29.6382C215.771 21.4964 218.361 13.4013 223.591 9.83365C227.577 7.11427 228.462 8.52671 228.871 15.5725C229.47 25.8844 231.8 52.7984 240.514 50.9057C242.994 50.3669 245.21 45.2536 246.748 42.3537C250.48 35.3216 254.33 28.3911 257.818 20.9737C259.538 17.3172 263.106 5.67092 266.534 6.00777C268.968 6.24695 270.326 18.9713 271.115 21.7614C272.525 26.7512 273.944 33.1209 277.54 32.9015C280.624 32.7134 283.878 28.5559 286.002 24.7996"
+            stroke="#FAD601" stroke-width="12" stroke-linecap="round" />
+          <path
+            d="M211.002 34.927C211.809 34.57 212.29 31.0355 212.72 29.8633C214.241 25.7122 215.937 21.2868 218.127 18.1606C220.348 14.9917 226.685 7.26933 229.77 11.6341C231.108 13.5274 230.789 20.1138 231.042 22.7741C231.713 29.828 232.676 37.0347 235.75 42.1286C241.676 51.9473 245.037 45.3033 248.665 35.9397C251.929 27.5173 253.689 16.33 258.971 10.8464C262.624 7.05483 263.922 9.5192 264.379 15.9101C265.046 25.234 266.01 36.3342 270.423 42.5787C274.216 47.9458 278.722 34.1073 280.157 29.6382C282.771 21.4964 285.361 13.4013 290.591 9.83365C294.577 7.11427 295.462 8.52671 295.871 15.5725C296.47 25.8844 298.8 52.7984 307.514 50.9057C309.994 50.3669 312.21 45.2536 313.748 42.3537C317.48 35.3216 321.33 28.3911 324.818 20.9737C326.538 17.3172 330.106 5.67092 333.534 6.00777C335.968 6.24695 337.326 18.9713 338.115 21.7614C339.525 26.7512 340.944 33.1209 344.54 32.9015C347.624 32.7134 350.878 28.5559 353.002 24.7996"
+            stroke="#FAD601" stroke-width="12" stroke-linecap="round" />
+        </svg>
+      </div>
+
+      <div class="shape shape-2">
+        <svg viewBox="0 0 251 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M4.50098 102.607C30.6353 90.228 57.7155 74.6329 69.4616 46.4422C74.2779 34.883 69.4616 26.2127 63.3048 26.2127C33.0855 26.2127 19.501 80.5 30.636 86.7756C43.7626 94.1736 76.4546 93.2682 90.445 86.273C108.659 77.166 124.37 51.916 124.37 31.6156C124.37 27.8397 122.29 21.7402 117.585 21.1867C104.495 19.6467 99.5414 30.3383 97.7326 42.5471C93.9144 68.3204 94.9461 88.6101 121.606 94.0632C137.998 97.4161 155.024 73.6384 162.316 61.0175C169.824 48.0232 177.995 21.2959 169.604 6.61142C166.671 1.47875 157.434 6.88036 156.034 10.3809C148.804 28.4559 149.783 47.7361 154.903 66.1691C158.242 78.1882 176.302 83.7151 187.446 83.5087C212.459 83.0455 228.532 65.7459 238.083 44.1805C239.861 40.1659 249.707 21.6587 244.24 18.925"
+            stroke="#F08C12" stroke-width="9" stroke-linecap="round" />
+        </svg>
+      </div>
+
+      <div class="shape shape-3">
+        <svg viewBox="0 0 236 126" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M5.00118 57.6485C63.3036 85.711 118.502 105.149 151.944 50.1521C171.476 -2.02552 106.649 -14.82 87.4929 43.0939C68.3368 101.008 150.783 165.1 230.269 76.0581M230.269 76.0581L206.231 73.8999M230.269 76.0581L226.548 108.005"
+            stroke="#82CE10" stroke-width="10" stroke-linecap="round" />
+        </svg>
+      </div>
+
+      <div class="shape shape-4">
+        <svg viewBox="0 0 172 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M166.052 19.839C129.873 0.565293 49.6076 -15.2179 17.9706 75.8429M17.9706 75.8429L60.6537 64.2063M17.9706 75.8429L5.00132 38.5194"
+            stroke="#22AFE5" stroke-width="10" stroke-linecap="round" />
+        </svg>
+      </div>
+
+    </div>
+
+    <div class="content">
+      <div class="logo">
+        <img height="60px" src="assets/logo.webp" alt="vaya!">
+      </div>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Sitio en construcción
+      </div>
+
+      <h1 class="headline">
+        Estamos en<br>modo
+        <span class="cursive">
+          creativo
+          <svg class="underline-doodle" width="359" height="58" viewBox="0 0 359 58" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.00195 34.927C6.80923 34.57 7.29013 31.0355 7.71969 29.8633C9.24087 25.7122 10.9367 21.2868 13.1274 18.1606C15.348 14.9917 21.6852 7.26933 24.7699 11.6341C26.108 13.5274 25.7893 20.1138 26.0423 22.7741C26.7132 29.828 27.676 37.0347 30.7502 42.1286C36.6757 51.9473 40.0366 45.3033 43.665 35.9397C46.9288 27.5173 48.6894 16.33 53.9715 10.8464C57.6237 7.05483 58.9218 9.5192 59.3792 15.9101C60.0465 25.234 61.01 36.3342 65.4231 42.5787C69.2162 47.9458 73.722 34.1073 75.157 29.6382C77.7712 21.4964 80.3611 13.4013 85.5907 9.83365C89.5767 7.11427 90.4616 8.52671 90.8711 15.5725C91.4705 25.8844 93.7996 52.7984 102.514 50.9057C104.994 50.3669 107.21 45.2536 108.748 42.3537C112.48 35.3216 116.33 28.3911 119.818 20.9737C121.538 17.3172 125.106 5.67092 128.534 6.00777C130.968 6.24695 132.326 18.9713 133.115 21.7614C134.525 26.7512 135.944 33.1209 139.54 32.9015C142.624 32.7134 145.878 28.5559 148.002 24.7996"
+              stroke="#FAD601" stroke-width="12" stroke-linecap="round" />
+            <path
+              d="M144.002 34.927C144.809 34.57 145.29 31.0355 145.72 29.8633C147.241 25.7122 148.937 21.2868 151.127 18.1606C153.348 14.9917 159.685 7.26933 162.77 11.6341C164.108 13.5274 163.789 20.1138 164.042 22.7741C164.713 29.828 165.676 37.0347 168.75 42.1286C174.676 51.9473 178.037 45.3033 181.665 35.9397C184.929 27.5173 186.689 16.33 191.971 10.8464C195.624 7.05483 196.922 9.5192 197.379 15.9101C198.046 25.234 199.01 36.3342 203.423 42.5787C207.216 47.9458 211.722 34.1073 213.157 29.6382C215.771 21.4964 218.361 13.4013 223.591 9.83365C227.577 7.11427 228.462 8.52671 228.871 15.5725C229.47 25.8844 231.8 52.7984 240.514 50.9057C242.994 50.3669 245.21 45.2536 246.748 42.3537C250.48 35.3216 254.33 28.3911 257.818 20.9737C259.538 17.3172 263.106 5.67092 266.534 6.00777C268.968 6.24695 270.326 18.9713 271.115 21.7614C272.525 26.7512 273.944 33.1209 277.54 32.9015C280.624 32.7134 283.878 28.5559 286.002 24.7996"
+              stroke="#FAD601" stroke-width="12" stroke-linecap="round" />
+            <path
+              d="M211.002 34.927C211.809 34.57 212.29 31.0355 212.72 29.8633C214.241 25.7122 215.937 21.2868 218.127 18.1606C220.348 14.9917 226.685 7.26933 229.77 11.6341C231.108 13.5274 230.789 20.1138 231.042 22.7741C231.713 29.828 232.676 37.0347 235.75 42.1286C241.676 51.9473 245.037 45.3033 248.665 35.9397C251.929 27.5173 253.689 16.33 258.971 10.8464C262.624 7.05483 263.922 9.5192 264.379 15.9101C265.046 25.234 266.01 36.3342 270.423 42.5787C274.216 47.9458 278.722 34.1073 280.157 29.6382C282.771 21.4964 285.361 13.4013 290.591 9.83365C294.577 7.11427 295.462 8.52671 295.871 15.5725C296.47 25.8844 298.8 52.7984 307.514 50.9057C309.994 50.3669 312.21 45.2536 313.748 42.3537C317.48 35.3216 321.33 28.3911 324.818 20.9737C326.538 17.3172 330.106 5.67092 333.534 6.00777C335.968 6.24695 337.326 18.9713 338.115 21.7614C339.525 26.7512 340.944 33.1209 344.54 32.9015C347.624 32.7134 350.878 28.5559 353.002 24.7996"
+              stroke="#FAD601" stroke-width="12" stroke-linecap="round" />
+          </svg>
+
+        </span>
+      </h1>
+
+      <p class="subline">
+        Regresamos en seguida.<br>
+        Mientras tanto, grandes cosas están pasando aquí adentro.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-num highlight">+200</span>
+          <span class="stat-label">Marcas</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">+11</span>
+          <span class="stat-label">Años de ideas<br>en acción</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">+30</span>
+          <span class="stat-label">Freelancers</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="bottom-bar"></div>
+
+</body>
+
+</html>
